@@ -1,13 +1,15 @@
 ---
 - name: Deploy Maven Artifact
   hosts: localhost
-  become: no   # since you removed sudo
+  become: yes
 
   tasks:
-   - name: Create deployment directory
-    file:
-       path: /tmp/deployment
-       state: directory
+    - name: Create deployment directory
+      file:
+        path: /opt/deployment
+        state: directory
+        mode: '0755'
+
     - name: Copy JAR file
       copy:
         src: "target/maven-example-1.0-SNAPSHOT.jar"
