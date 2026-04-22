@@ -1,12 +1,13 @@
---- 
-- name: Deploy Maven Artifact 
-  hosts: local 
-  become: yes 
-   tasks: 
+---
+- name: Deploy Maven Artifact
+  hosts: localhost
+  become: yes
+
+  tasks:
     - name: Copy JAR file
       copy:
-           src: "/var/lib/jenkins/workspace/maven-example/target/maven-example-1.0-SNAPSHOT.jar" 
-           dest: "/opt/deployment/maven-example-1.0-SNAPSHOT.jar"
-    - name: Run application
-      shell :nohup java -jar/opt/maven-example-1.0-SNAPSHOT.jar &
+        src: "/var/lib/jenkins/workspace/maven-example/target/maven-example-1.0-SNAPSHOT.jar"
+        dest: "/opt/deployment/maven-example-1.0-SNAPSHOT.jar"
 
+    - name: Run application
+      shell: nohup java -jar /opt/deployment/maven-example-1.0-SNAPSHOT.jar > /dev/null 2>&1 &
