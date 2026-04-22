@@ -1,12 +1,19 @@
 ---
 - name: Deploy Maven Artifact
   hosts: localhost
-  become: no
+  become: no   # since you removed sudo
 
   tasks:
+    - name: Create deployment directory
+      file:
+        path: /opt/deployment
+        state: directory
+        mode: '0755'
+
     - name: Copy JAR file
       copy:
-         src: "/var/lib/jenkins/workspace/d8/target/maven-example-1.0-SNAPSHOT.jar"
-         dest: "/opt/deployment/maven-example-1.0-SNAPSHOT.jar"
+        src: "target/maven-example-1.0-SNAPSHOT.jar"
+        dest: "/opt/deployment/maven-example-1.0-SNAPSHOT.jar"
+
     - name: Run application
       shell: nohup java -jar /opt/deployment/maven-example-1.0-SNAPSHOT.jar > /dev/null 2>&1 &
