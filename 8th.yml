@@ -1,7 +1,7 @@
 ---
 - name: Deploy Maven Artifact
   hosts: localhost
-  become: yes
+  become: no
 
   tasks:
     - name: Copy JAR file
