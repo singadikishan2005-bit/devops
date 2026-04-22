@@ -4,12 +4,10 @@
   become: no   # since you removed sudo
 
   tasks:
-    - name: Create deployment directory
-      file:
-        path: /opt/deployment
-        state: directory
-        mode: '0755'
-
+   - name: Create deployment directory
+    file:
+       path: /tmp/deployment
+       state: directory
     - name: Copy JAR file
       copy:
         src: "target/maven-example-1.0-SNAPSHOT.jar"
