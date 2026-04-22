@@ -6,14 +6,14 @@
   tasks:
     - name: Create deployment directory
       file:
-        path: /opt/deployment
+        path: /tmp/deployment
         state: directory
         mode: '0755'
 
     - name: Copy JAR file
       copy:
         src: "target/maven-example-1.0-SNAPSHOT.jar"
-        dest: "/opt/deployment/maven-example-1.0-SNAPSHOT.jar"
+        dest: "/tmp/deployment/maven-example-1.0-SNAPSHOT.jar"
 
     - name: Run application
       shell: nohup java -jar /opt/deployment/maven-example-1.0-SNAPSHOT.jar > /dev/null 2>&1 &
